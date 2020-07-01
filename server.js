@@ -1,9 +1,9 @@
-import rafter from 'rafter';
-import winstonFactory from './lib/utils/winston';
+import rafter from "rafter";
+import winstonFactory from "./lib/utils/winston";
 
 const run = async () => {
   try {
-    const logger = winstonFactory(process.env.NODE_LOG_LEVEL || 'info');
+    const logger = winstonFactory(process.env.NODE_LOG_LEVEL || "info");
     const rafterServer = rafter({
       paths: [`${__dirname}/lib/**/*.js`],
       logger: logger,

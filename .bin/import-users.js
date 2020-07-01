@@ -1,25 +1,25 @@
-import { join } from 'path';
-import diAutoloaderFactory from '@rafterjs/di-autoloader';
-import userFixtures from './fixtures/users.json';
-import UserModel from './../lib/users/user-schema';
+import { join } from "path";
+import diAutoloaderFactory from "@rafterjs/di-autoloader";
+import userFixtures from "./fixtures/users.json";
+import UserModel from "./../lib/users/user-schema";
 
 const run = async () => {
   try {
     const diAutoLoader = diAutoloaderFactory(console);
-    await diAutoLoader.load([join(__dirname, '/../lib', '**/*.js')]);
+    await diAutoLoader.load([join(__dirname, "/../lib", "**/*.js")]);
 
     /**
      * @type {MongooseDbDao} dbDao
      */
-    const dbDao = diAutoLoader.get('dbDao');
+    const dbDao = diAutoLoader.get("dbDao");
     /**
      * @type {UserManager} userManager
      */
-    const userManager = diAutoLoader.get('userManager');
+    const userManager = diAutoLoader.get("userManager");
     /**
      * @type {Logger} logger
      */
-    const logger = diAutoLoader.get('logger');
+    const logger = diAutoLoader.get("logger");
 
     logger.info(`   Connecting to a DB...`);
     await dbDao.connect();

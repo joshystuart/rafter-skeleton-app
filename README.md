@@ -1,4 +1,5 @@
 # rafter-skeleton-app
+
 An example _Rafter_ project to guide your application design.
 
 ## Getting started
@@ -13,7 +14,8 @@ _NOTE: ensure mongodb is running before you install, as yarn postinstall will im
 Then open: [http://localhost:4000](http://localhost:4000)
 
 ### Technologies and packages used
-* Mongoose & MongoDB
-* jsonapi
-* cors
-* Winston
+
+- Mongoose & MongoDB
+- jsonapi
+- cors
+- Winston
