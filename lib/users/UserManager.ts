@@ -1,5 +1,6 @@
-import { UserModel } from "./UserSchema";
-import MongooseDbDao from "../utils/MongooseDbDao";
+import { UserModel } from './UserSchema';
+import MongooseDbDao from '../utils/MongooseDbDao';
+import { Sort } from '../common/request/SortDto';
 
 export default class UserManager {
   private dbDao: MongooseDbDao;
@@ -19,12 +20,7 @@ export default class UserManager {
     return this.dbDao.create(userModel);
   }
 
-  public async findAll(
-    query: object,
-    offset: number,
-    limit: number,
-    sortBy: object
-  ): Promise<UserModel> {
+  public async findAll(query: object, offset: number, limit: number, sortBy?: Sort): Promise<UserModel[]> {
     const option = {
       criteria: query,
       offset,

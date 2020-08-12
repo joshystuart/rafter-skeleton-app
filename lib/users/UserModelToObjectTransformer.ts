@@ -1,6 +1,6 @@
-import TransformerInterface from "../common/mappers/transformer-interface";
-import UserModel from "./user-schema";
-import { FIELDS } from "./user-constants";
+import TransformerInterface from '../common/mappers/transformer-interface';
+import UserModel from './user-schema';
+import { FIELDS } from './user-constants';
 
 /**
  * A User mapper to convert database models to responses
@@ -14,10 +14,10 @@ export default class UserModelToObjectTransformer extends TransformerInterface {
    */
   convert(source) {
     if (source instanceof Array) {
-      return this._convertArray(source);
+      return this.convertArray(source);
     }
 
-    return this._convertSingle(source);
+    return this.convertSingle(source);
   }
 
   /**
@@ -49,7 +49,7 @@ export default class UserModelToObjectTransformer extends TransformerInterface {
     const response = [];
 
     for (const model of source) {
-      response.push(this._convertSingle(model));
+      response.push(this.convertSingle(model));
     }
 
     return response;

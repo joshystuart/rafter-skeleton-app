@@ -1,7 +1,7 @@
-import { Status } from "../helpers/ResponseConstants";
+import { Status } from '../helpers/ResponseConstants';
 
 export default class HttpError extends Error {
-  private status: Status;
+  private readonly status: Status;
 
   constructor(status: Status, message: string) {
     super(message);

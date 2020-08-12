@@ -1,5 +1,5 @@
-import HttpError from "./HttpError";
-import { Status } from "../helpers/ResponseConstants";
+import HttpError from './HttpError';
+import { Status } from '../helpers/ResponseConstants';
 
 export default class InternalServerError extends HttpError {
   constructor(message = `The server encountered an unexpected problem`) {

@@ -1,15 +1,15 @@
+export type Params = {
+  id: string;
+};
+
 export default class ParamsDto {
-  /**
-   * @param {string} id
-   */
-  constructor(id) {
-    this._id = id;
+  private readonly id: string;
+
+  constructor(id: string) {
+    this.id = id;
   }
 
-  /**
-   * @returns {string}
-   */
-  getId() {
-    return this._id;
+  public getId(): string {
+    return this.id;
   }
 }

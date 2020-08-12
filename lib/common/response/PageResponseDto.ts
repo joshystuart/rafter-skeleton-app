@@ -5,16 +5,16 @@ class PageResponseDto {
    * @param {number} total
    */
   constructor(offset = 0, limit = 1, total = 1) {
-    this._limit = limit;
-    this._offset = offset;
-    this._total = total;
+    this.limit = limit;
+    this.offset = offset;
+    this.total = total;
   }
 
   /**
    * @return {Number}
    */
   getLimit() {
-    return this._limit;
+    return this.limit;
   }
 
   /**
@@ -22,7 +22,7 @@ class PageResponseDto {
    * @return {PageResponseDto}
    */
   setLimit(limit) {
-    this._limit = limit;
+    this.limit = limit;
     return this;
   }
 
@@ -30,7 +30,7 @@ class PageResponseDto {
    * @return {Number}
    */
   getOffset() {
-    return this._offset;
+    return this.offset;
   }
 
   /**
@@ -38,7 +38,7 @@ class PageResponseDto {
    * @return {PageResponseDto}
    */
   setOffset(offset) {
-    this._offset = offset;
+    this.offset = offset;
     return this;
   }
 
@@ -46,7 +46,7 @@ class PageResponseDto {
    * @return {Number}
    */
   getTotal() {
-    return this._total;
+    return this.total;
   }
 
   /**
@@ -54,7 +54,7 @@ class PageResponseDto {
    * @return {PageResponseDto}
    */
   setTotal(total) {
-    this._total = total;
+    this.total = total;
     return this;
   }
 }

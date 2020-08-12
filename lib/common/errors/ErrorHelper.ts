@@ -1,5 +1,5 @@
-import HttpError from "./HttpError";
-import InternalServerError from "./InternalServerError";
+import HttpError from './HttpError';
+import InternalServerError from './InternalServerError';
 
 export default class ErrorHelper {
   /**
@@ -7,14 +7,14 @@ export default class ErrorHelper {
    *
    * This helps with returning error codes and messages.
    *
-   * @param {HttpError|Error} err
+   * @param {HttpError|Error} error
    * @return {HttpError}
    */
-  public normalizeError(err: Error): Error {
-    if (err instanceof HttpError) {
-      return err;
+  public normalizeError(error: Error): Error {
+    if (error instanceof HttpError) {
+      return error;
     }
 
-    return new InternalServerError(err.message);
+    return new InternalServerError(error.message);
   }
 }

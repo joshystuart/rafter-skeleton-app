@@ -9,12 +9,12 @@ export default class ListUsersController {
     getRequestDtoProvider,
     listUsersInteractor,
     usersCollectionResponseDtoToResponseDtoTransformer,
-    rendererService
+    rendererService,
   ) {
-    this._getRequestDtoProvider = getRequestDtoProvider;
-    this._listUsersInteractor = listUsersInteractor;
-    this._usersCollectionResponseDtoToResponseDtoTransformer = usersCollectionResponseDtoToResponseDtoTransformer;
-    this._rendererService = rendererService;
+    this.getRequestDtoProvider = getRequestDtoProvider;
+    this.listUsersInteractor = listUsersInteractor;
+    this.usersCollectionResponseDtoToResponseDtoTransformer = usersCollectionResponseDtoToResponseDtoTransformer;
+    this.rendererService = rendererService;
   }
 
   /**
@@ -24,19 +24,15 @@ export default class ListUsersController {
    * @return {Promise<void>}
    */
   async listUsers(req, res) {
-    const request = this._getRequestDtoProvider.createInstance(req);
+    const request = this.getRequestDtoProvider.createInstance(req);
 
     // convert express request into list user request
-    const usersCollectionResponseDto = await this._listUsersInteractor.listUsers(
-      request
-    );
+    const usersCollectionResponseDto = await this.listUsersInteractor.listUsers(request);
 
     // map the interactor response to a response dto
-    const response = this._usersCollectionResponseDtoToResponseDtoTransformer.convert(
-      usersCollectionResponseDto
-    );
+    const response = this.usersCollectionResponseDtoToResponseDtoTransformer.convert(usersCollectionResponseDto);
 
     // convert list user response into json
-    await this._rendererService.render(req, res, response);
+    await this.rendererService.render(req, res, response);
   }
 }

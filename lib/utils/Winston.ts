@@ -1,6 +1,6 @@
-import winston from "winston";
+import winston from 'winston';
 
-export default (level = "info") => {
+export default (level = 'info') => {
   const winstonConsole = new winston.transports.Console({
     level: level,
   });

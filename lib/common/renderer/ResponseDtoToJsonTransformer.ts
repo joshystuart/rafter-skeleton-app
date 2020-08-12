@@ -1,15 +1,10 @@
-import Transformer from "../mappers/Transformer";
-import DataResponseDto from "../response/DataResponseDto";
-import MetadataResponseDto from "../response/MetadataResponseDto";
-import {
-  JsonDataResponse,
-  JsonMetaDataResponse,
-  JsonResponse,
-} from "./RendererService";
-import ResponseDto from "../response/ResponseDto";
+import Transformer from '../mappers/Transformer';
+import DataResponseDto from '../response/DataResponseDto';
+import MetadataResponseDto from '../response/MetadataResponseDto';
+import { JsonDataResponse, JsonMetaDataResponse, JsonResponse } from './RendererService';
+import ResponseDto from '../response/ResponseDto';
 
-class ResponseDtoToJsonTransformer
-  implements Transformer<ResponseDto, JsonResponse> {
+class ResponseDtoToJsonTransformer implements Transformer<ResponseDto, JsonResponse> {
   public convert(source: ResponseDto): JsonResponse {
     return {
       data: this.getData(source.getData()),
@@ -17,9 +12,7 @@ class ResponseDtoToJsonTransformer
     };
   }
 
-  private getMetadata(
-    metadataResponse: MetadataResponseDto
-  ): JsonMetaDataResponse {
+  private getMetadata(metadataResponse: MetadataResponseDto): JsonMetaDataResponse {
     const metadata = {};
 
     if (metadataResponse) {
@@ -38,9 +31,7 @@ class ResponseDtoToJsonTransformer
     return metadata;
   }
 
-  private getData(
-    data: DataResponseDto | DataResponseDto[]
-  ): JsonDataResponse[] | JsonDataResponse {
+  private getData(data: DataResponseDto | DataResponseDto[]): JsonDataResponse[] | JsonDataResponse {
     let formattedData;
 
     if (data instanceof Array) {

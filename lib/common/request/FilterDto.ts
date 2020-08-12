@@ -1,33 +1,34 @@
-export default class FilterDto {
-  /**
-   * @param {string} key
-   * @param {string|number} value
-   * @param {string} operator
-   */
-  constructor(key, value, operator) {
-    this._key = key;
-    this._value = value;
-    this._operator = operator;
+export type Value = string | number;
+export type OperatorValue = {
+  [operator: string]: Value;
+};
+
+export type Filter = {
+  [key: string]: OperatorValue | Value;
+};
+
+export class FilterDto {
+  private readonly key: string;
+  private readonly value: string | number;
+  private readonly operator?: string;
+
+  constructor(key: string, value: string | number, operator?: string) {
+    this.key = key;
+    this.value = value;
+    this.operator = operator;
   }
 
-  /**
-   * @returns {string}
-   */
-  getKey() {
-    return this._key;
+  public getKey(): string {
+    return this.key;
   }
 
-  /**
-   * @returns {string|number}
-   */
-  getValue() {
-    return this._value;
+  public getValue(): string | number {
+    return this.value;
   }
 
-  /**
-   * @return {string}
-   */
-  getOperator() {
-    return this._operator;
+  public getOperator(): string | undefined {
+    return this.operator;
   }
 }
+
+export default FilterDto;

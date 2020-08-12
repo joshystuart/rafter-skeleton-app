@@ -1,5 +1,5 @@
-import TransformerInterface from "../common/mappers/transformer-interface";
-import { ENTITY_TYPES } from "./user-constants";
+import TransformerInterface from '../common/mappers/transformer-interface';
+import { ENTITY_TYPES } from './user-constants';
 
 export default class UsersCollectionResponseDtoToResponseDtoTransformer extends TransformerInterface {
   /**
@@ -8,8 +8,8 @@ export default class UsersCollectionResponseDtoToResponseDtoTransformer extends 
    */
   constructor(userModelToObjectTransformer, responseDtoProvider) {
     super();
-    this._userModelToObjectTransformer = userModelToObjectTransformer;
-    this._responseDtoProvider = responseDtoProvider;
+    this.userModelToObjectTransformer = userModelToObjectTransformer;
+    this.responseDtoProvider = responseDtoProvider;
   }
 
   /**
@@ -23,15 +23,9 @@ export default class UsersCollectionResponseDtoToResponseDtoTransformer extends 
     const total = source.getTotal();
 
     // map users to a user object
-    const userObjects = this._userModelToObjectTransformer.convert(users);
+    const userObjects = this.userModelToObjectTransformer.convert(users);
 
     // map to a response dto
-    return this._responseDtoProvider.createInstance(
-      userObjects,
-      ENTITY_TYPES.USER,
-      offset,
-      limit,
-      total
-    );
+    return this.responseDtoProvider.createInstance(userObjects, ENTITY_TYPES.USER, offset, limit, total);
   }
 }

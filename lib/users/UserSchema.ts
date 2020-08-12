@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
@@ -9,8 +9,8 @@ const userSchema = new Schema(
     email: String,
   },
   {
-    collection: "users",
-  }
+    collection: 'users',
+  },
 );
 
 userSchema.index({ email: 1 }, { unique: true });
@@ -19,7 +19,7 @@ userSchema.index({ email: 1 }, { unique: true });
  * @returns {String}
  */
 userSchema.methods.getId = function () {
-  return this._id;
+  return this.id;
 };
 
 /**
@@ -75,7 +75,7 @@ userSchema.methods.setEmail = function (email: string) {
  */
 export class UserModel {
   constructor() {
-    return mongoose.model("user", userSchema);
+    return mongoose.model('user', userSchema);
   }
 }
 

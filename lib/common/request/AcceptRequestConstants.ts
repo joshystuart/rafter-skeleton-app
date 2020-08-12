@@ -1,5 +1,5 @@
-const CSV = "text/csv";
-const JSON = "application/json";
+const CSV = 'text/csv';
+const JSON = 'application/json';
 
 export { CSV, JSON };
 

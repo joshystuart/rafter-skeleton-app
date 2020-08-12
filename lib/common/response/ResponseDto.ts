@@ -1,16 +1,21 @@
-import DataResponseDto from "./DataResponseDto";
-import MetadataResponseDto from "./MetadataResponseDto";
+import DataResponseDto from './DataResponseDto';
+import MetadataResponseDto from './MetadataResponseDto';
+
+export type Model = {
+  getId?: () => string;
+  id: string;
+};
 
 class ResponseDto {
-  private data: DataResponseDto;
-  private metadata: MetadataResponseDto;
+  private readonly data: DataResponseDto | DataResponseDto[];
+  private readonly metadata: MetadataResponseDto;
 
-  constructor(data: DataResponseDto, metadata: MetadataResponseDto) {
+  constructor(data: DataResponseDto | DataResponseDto[], metadata: MetadataResponseDto) {
     this.data = data;
     this.metadata = metadata;
   }
 
-  public getData(): DataResponseDto {
+  public getData(): DataResponseDto | DataResponseDto[] {
     return this.data;
   }
 

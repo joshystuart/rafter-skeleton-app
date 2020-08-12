@@ -5,8 +5,8 @@
  * @param {Logger} logger
  * @return {Function}
  */
-import { DatabaseDao } from "./DatabaseDao";
-import { ILogger } from "@rafterjs/logger-plugin";
+import { DatabaseDao } from './DatabaseDao';
+import { ILogger } from '@rafterjs/logger-plugin';
 
 export default (dbDao: DatabaseDao, logger: ILogger) => {
   return async () => {

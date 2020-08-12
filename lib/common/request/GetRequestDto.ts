@@ -1,59 +1,46 @@
-import { LIMIT, OFFSET, SORT } from "./request-constants";
+import { LIMIT, OFFSET, SORT } from './RequestConstants';
+import FilterDto from './FilterDto';
+import SortDto from './SortDto';
+import ParamsDto from './ParamsDto';
 
 export default class GetRequestDto {
-  /**
-   * @param {FilterDto[]} filters
-   * @param {object=} params
-   * @param {number=} offset
-   * @param {number=} limit
-   * @param {SortDto[]=} sortBy
-   */
+  private readonly filters: FilterDto[];
+  private readonly params?: ParamsDto;
+  private readonly offset: number;
+  private readonly limit: number;
+  private readonly sortBy: SortDto[];
+
   constructor(
-    filters,
-    params = {},
+    filters: FilterDto[],
+    params?: ParamsDto,
     offset = OFFSET,
     limit = LIMIT,
-    sortBy = SORT
+    sortBy: SortDto[] = [new SortDto(SORT)],
   ) {
-    this._filters = filters;
-    this._params = params;
-    this._offset = offset;
-    this._limit = limit;
-    this._sortBy = sortBy;
+    this.filters = filters;
+    this.params = params;
+    this.offset = offset;
+    this.limit = limit;
+    this.sortBy = sortBy;
   }
 
-  /**
-   * @returns {FilterDto[]}
-   */
-  getFilters() {
-    return this._filters;
+  public getFilters(): FilterDto[] {
+    return this.filters;
   }
 
-  /**
-   * @returns {ParamsDto}
-   */
-  getParams() {
-    return this._params;
+  public getParams(): ParamsDto | undefined {
+    return this.params;
   }
 
-  /**
-   * @returns {number}
-   */
-  getLimit() {
-    return this._limit;
+  public getLimit(): number {
+    return this.limit;
   }
 
-  /**
-   * @returns {number}
-   */
-  getOffset() {
-    return this._offset;
+  public getOffset(): number {
+    return this.offset;
   }
 
-  /**
-   * @returns {SortDto[]}
-   */
-  getSortBy() {
-    return this._sortBy;
+  public getSortBy(): SortDto[] {
+    return this.sortBy;
   }
 }

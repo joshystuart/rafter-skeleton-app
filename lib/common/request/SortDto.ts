@@ -1,26 +1,23 @@
-import { SORT_QUALIFIER } from "../json/json-constants";
+import { SORT_QUALIFIER } from '../json/JsonConstants';
+
+export type Sort = {
+  [key: string]: string;
+};
 
 export default class SortDto {
-  /**
-   * @param {string} key
-   * @param {object} order
-   */
-  constructor(key, order = SORT_QUALIFIER.ASCENDING) {
-    this._key = key;
-    this._order = order;
+  private readonly key: string;
+  private readonly order: string;
+
+  constructor(key: string, order: string = SORT_QUALIFIER.ASCENDING) {
+    this.key = key;
+    this.order = order;
   }
 
-  /**
-   * @returns {string}
-   */
-  getKey() {
-    return this._key;
+  public getKey(): string {
+    return this.key;
   }
 
-  /**
-   * @returns {object}
-   */
-  getOrder() {
-    return this._order;
+  public getOrder(): string {
+    return this.order;
   }
 }

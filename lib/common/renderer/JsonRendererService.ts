@@ -1,11 +1,10 @@
-import AbstractRendererService from "./AbstractRendererService";
-import { RendererService } from "./RendererService";
-import { Request, Response } from "rafter";
-import ResponseDto from "../response/ResponseDto";
-import Transformer from "../mappers/Transformer";
+import AbstractRendererService from './AbstractRendererService';
+import { RendererService } from './RendererService';
+import { Request, Response } from 'rafter';
+import ResponseDto from '../response/ResponseDto';
+import Transformer from '../mappers/Transformer';
 
-class JsonRendererService extends AbstractRendererService
-  implements RendererService {
+class JsonRendererService extends AbstractRendererService implements RendererService {
   private responseDtoToJsonTransformer: Transformer;
 
   constructor(responseDtoToJsonTransformer: Transformer) {
@@ -13,11 +12,7 @@ class JsonRendererService extends AbstractRendererService
     this.responseDtoToJsonTransformer = responseDtoToJsonTransformer;
   }
 
-  public async render(
-    request: Request,
-    response: Response,
-    responseDto: ResponseDto
-  ): Promise<void> {
+  public async render(request: Request, response: Response, responseDto: ResponseDto): Promise<void> {
     response.json(this.responseDtoToJsonTransformer.convert(responseDto));
   }
 }

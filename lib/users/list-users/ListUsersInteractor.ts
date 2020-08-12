@@ -1,52 +1,39 @@
-import UsersCollectionResponseDto from "../users-collection-response-dto";
+import UsersCollectionResponseDto from '../UsersCollectionResponseDto';
+import UserManager from '../UserManager';
+import FilterDtoToFilterObjectTransformer from '../../common/request/mappers/FilterDtoToFilterObjectTransformer';
+import SortDtoToQueryObjectTransformer from '../../common/request/mappers/SortDtoToQueryObjectTransformer';
+import GetRequestDto from '../../common/request/GetRequestDto';
 
 export default class ListUsersInteractor {
-  /**
-   * @param {UserManager} userManager
-   * @param {FilterDtoToFilterObjectTransformer} filterDtoToFilterObjectTransformer
-   * @param {SortDtoToQueryObjectTransformer} sortDtoToQueryObjectTransformer
-   */
+  private readonly userManager: UserManager;
+  private readonly filterDtoToFilterObjectTransformer: FilterDtoToFilterObjectTransformer;
+  private readonly sortDtoToQueryObjectTransformer: SortDtoToQueryObjectTransformer;
+
   constructor(
-    userManager,
-    filterDtoToFilterObjectTransformer,
-    sortDtoToQueryObjectTransformer
+    userManager: UserManager,
+    filterDtoToFilterObjectTransformer: FilterDtoToFilterObjectTransformer,
+    sortDtoToQueryObjectTransformer: SortDtoToQueryObjectTransformer,
   ) {
-    this._userManager = userManager;
-    this._filterDtoToFilterObjectTransformer = filterDtoToFilterObjectTransformer;
-    this._sortDtoToQueryObjectTransformer = sortDtoToQueryObjectTransformer;
+    this.userManager = userManager;
+    this.filterDtoToFilterObjectTransformer = filterDtoToFilterObjectTransformer;
+    this.sortDtoToQueryObjectTransformer = sortDtoToQueryObjectTransformer;
   }
 
-  /**
-   * @param {GetRequestDto} getRequestDto
-   * @returns {Promise.<UsersCollectionResponseDto>}
-   */
-  async listUsers(getRequestDto) {
+  public async listUsers(getRequestDto: GetRequestDto): Promise<UsersCollectionResponseDto> {
     const limit = getRequestDto.getLimit();
     const offset = getRequestDto.getOffset();
     const filters = getRequestDto.getFilters();
     const sort = getRequestDto.getSortBy();
 
-    const users = await this._userManager.findAll(
-      this._filterDtoToFilterObjectTransformer.convert(filters),
+    const users = await this.userManager.findAll(
+      this.filterDtoToFilterObjectTransformer.convert(filters),
       offset,
       limit,
-      this._sortDtoToQueryObjectTransformer.convert(sort)
+      this.sortDtoToQueryObjectTransformer.convert(sort),
     );
 
-    const allUsers = await this._userManager.findAll(
-      this._filterDtoToFilterObjectTransformer.convert(filters),
-      0,
-      0,
-      0,
-      true,
-      false
-    );
+    const allUsers = await this.userManager.findAll(this.filterDtoToFilterObjectTransformer.convert(filters), 0, 0);
 
-    return new UsersCollectionResponseDto(
-      users,
-      offset,
-      limit,
-      allUsers.length
-    );
+    return new UsersCollectionResponseDto(users, offset, limit, allUsers.length);
   }
 }

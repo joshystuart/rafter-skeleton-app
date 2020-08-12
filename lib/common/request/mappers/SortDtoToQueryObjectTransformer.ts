@@ -1,22 +1,14 @@
-import TransformerInterface from "../../mappers/transformer-interface";
-import { SORT_QUALIFIER } from "../../json/json-constants";
-import { SORT } from "../request-constants";
+import Transformer from '../../mappers/Transformer';
+import { SORT_QUALIFIER } from '../../json/JsonConstants';
+import SortDto, { Sort } from '../SortDto';
 
-class SortDtoToQueryObjectTransformer extends TransformerInterface {
-  /**
-   * @param {SortDto[]} sorts
-   * @return {object}
-   */
-  convert(sorts = []) {
-    const sortBy = {};
+class SortDtoToQueryObjectTransformer implements Transformer<SortDto[], Sort> {
+  public convert(sorts: SortDto[] = []): Sort {
+    const sortBy: Sort = {};
 
-    if (sorts instanceof Array) {
-      for (const sort of sorts) {
-        sortBy[sort.getKey()] =
-          sort.getOrder() === SORT_QUALIFIER.ASCENDING
-            ? SORT.ASCENDING
-            : SORT.DESCENDING;
-      }
+    for (const sort of sorts) {
+      sortBy[sort.getKey()] =
+        sort.getOrder() === SORT_QUALIFIER.ASCENDING ? SORT_QUALIFIER.ASCENDING : SORT_QUALIFIER.DESCENDING;
     }
 
     return sortBy;

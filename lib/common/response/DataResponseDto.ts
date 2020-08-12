@@ -5,16 +5,16 @@ class DataResponseDto {
    * @param {object} attributes
    */
   constructor(id, type, attributes) {
-    this._id = id;
-    this._type = type;
-    this._attributes = attributes;
+    this.id = id;
+    this.type = type;
+    this.attributes = attributes;
   }
 
   /**
    * @return {string}
    */
   getId() {
-    return this._id;
+    return this.id;
   }
 
   /**
@@ -22,7 +22,7 @@ class DataResponseDto {
    * @return {DataResponseDto}
    */
   setId(id) {
-    this._id = id;
+    this.id = id;
     return this;
   }
 
@@ -30,7 +30,7 @@ class DataResponseDto {
    * @return {string}
    */
   getType() {
-    return this._type;
+    return this.type;
   }
 
   /**
@@ -38,7 +38,7 @@ class DataResponseDto {
    * @return {DataResponseDto}
    */
   setType(type) {
-    this._type = type;
+    this.type = type;
     return this;
   }
 
@@ -46,7 +46,7 @@ class DataResponseDto {
    * @return {object}
    */
   getAttributes() {
-    return this._attributes;
+    return this.attributes;
   }
 
   /**
@@ -54,7 +54,7 @@ class DataResponseDto {
    * @return {DataResponseDto}
    */
   setAttributes(attributes) {
-    this._attributes = attributes;
+    this.attributes = attributes;
     return this;
   }
 }

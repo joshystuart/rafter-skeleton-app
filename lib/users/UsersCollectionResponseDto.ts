@@ -1,16 +1,16 @@
-import AbstractCollectionResponseDto from "../common/response/abstract-collection-response-dto";
+import AbstractCollectionResponseDto from '../common/response/AbstractCollectionResponseDto';
 
 export default class UsersCollectionResponseDto extends AbstractCollectionResponseDto {
   constructor(users = [], offset = 0, limit = 0, total = 0) {
     super(offset, limit, total);
-    this._users = users;
+    this.users = users;
   }
 
   /**
    * @return {UserModel[]|UserModel}
    */
   getUsers() {
-    return this._users;
+    return this.users;
   }
 
   /**
@@ -18,7 +18,7 @@ export default class UsersCollectionResponseDto extends AbstractCollectionRespon
    * @return {UsersCollectionResponseDto}
    */
   setUsers(users = []) {
-    this._users = users;
+    this.users = users;
     return this;
   }
 }

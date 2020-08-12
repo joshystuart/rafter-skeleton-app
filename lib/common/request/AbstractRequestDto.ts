@@ -1,42 +1,29 @@
-import InstantiationError from "./../errors/interface/instantiation-error";
-
 export default class AbstractRequestDto {
-  constructor() {
-    /* istanbul ignore if  */
-    if (this.constructor === AbstractRequestDto) {
-      throw new InstantiationError();
-    }
-  }
+  private activeUser: any;
+  private marketplace: any;
 
-  /**
-   * @param {User} activeUser
-   * @return {AbstractRequestDto}
-   */
-  setActiveUser(activeUser) {
-    this._activeUser = activeUser;
+  public setActiveUser(activeUser): AbstractRequestDto {
+    this.activeUser = activeUser;
     return this;
   }
 
-  /**
-   * @returns {User}
-   */
-  getActiveUser() {
-    return this._activeUser;
+  public getActiveUser() {
+    return this.activeUser;
   }
 
   /**
    * @param {Marketplace} marketplace
    * @return {AbstractRequestDto}
    */
-  setMarketplace(marketplace) {
-    this._marketplace = marketplace;
+  public setMarketplace(marketplace): AbstractRequestDto {
+    this.marketplace = marketplace;
     return this;
   }
 
   /**
    * @returns {Marketplace}
    */
-  getMarketplace() {
-    return this._marketplace;
+  public getMarketplace() {
+    return this.marketplace;
   }
 }

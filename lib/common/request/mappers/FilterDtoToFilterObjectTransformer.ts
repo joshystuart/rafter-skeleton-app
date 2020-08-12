@@ -1,29 +1,25 @@
-import TransformerInterface from "../../mappers/transformer-interface";
+import Transformer from '../../mappers/Transformer';
+import { Filter, FilterDto } from '../FilterDto';
 
-class FilterDtoToFilterObjectTransformer extends TransformerInterface {
-  /**
-   * @param {FilterDto[]} filters
-   * @return {object}
-   */
-  convert(filters = []) {
-    let queries = {};
+export class FilterDtoToFilterObjectTransformer implements Transformer<FilterDto[], Filter> {
+  public convert(filters: FilterDto[] = []): Filter {
+    let queries: Filter = {};
 
-    if (filters instanceof Array) {
-      for (const filter of filters) {
-        const query = {};
-        if (filter.getOperator()) {
-          query[filter.getKey()] = {
-            [filter.getOperator()]: filter.getValue(),
-          };
-        } else {
-          query[filter.getKey()] = filter.getValue();
-        }
+    for (const filter of filters) {
+      const query: Filter = {};
 
-        queries = {
-          ...queries,
-          ...query,
+      if (filter.getOperator()) {
+        query[filter.getKey()] = {
+          [filter.getOperator() as string]: filter.getValue(),
         };
+      } else {
+        query[filter.getKey()] = filter.getValue();
       }
+
+      queries = {
+        ...queries,
+        ...query,
+      };
     }
 
     return queries;

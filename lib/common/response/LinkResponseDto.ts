@@ -4,15 +4,15 @@ class LinkResponseDto {
    * @param {String=} related
    */
   constructor(self, related) {
-    this._self = self;
-    this._related = related;
+    this.self = self;
+    this.related = related;
   }
 
   /**
    * @return {String}
    */
   getSelf() {
-    return this._self;
+    return this.self;
   }
 
   /**
@@ -20,7 +20,7 @@ class LinkResponseDto {
    * @return {LinkResponseDto}
    */
   setSelf(self) {
-    this._self = self;
+    this.self = self;
     return this;
   }
 
@@ -28,7 +28,7 @@ class LinkResponseDto {
    * @return {String}
    */
   getRelated() {
-    return this._related;
+    return this.related;
   }
 
   /**
@@ -36,7 +36,7 @@ class LinkResponseDto {
    * @return {LinkResponseDto}
    */
   setRelated(related) {
-    this._related = related;
+    this.related = related;
     return this;
   }
 }

@@ -1,4 +1,4 @@
-import MongooseDbDao from "./MongooseDbDao";
+import MongooseDbDao from './MongooseDbDao';
 
 export type DatabaseDao = MongooseDbDao;
 

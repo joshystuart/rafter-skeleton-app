@@ -1,39 +1,33 @@
-import get from "lodash.get";
-import {
-  FILTER,
-  PAGE_LIMIT,
-  PAGE_OFFSET,
-  SORT,
-} from "./../../common/json/json-constants";
-import GetRequestDto from "./get-request-dto";
+import get from 'lodash.get';
+import { FILTER, PAGE_LIMIT, PAGE_OFFSET, SORT } from '../json/JsonConstants';
+import GetRequestDto from './GetRequestDto';
+import FilterObjectToFilterDtoTransformer from './mappers/FilterObjectToFilterDtoTransformer';
+import SortStringToSortDtoTransformer from './mappers/SortStringToSortDtoTransformer';
+import ParamsObjectToParamsDtoTransformer from './mappers/ParamsObjectToParamsDtoTransformer';
+import { Request } from 'rafter';
 
 export default class GetRequestDtoProvider {
-  /**
-   * @param {FilterObjectToFilterDtoTransformer} filterObjectToFilterDtoTransformer
-   * @param {SortStringToSortDtoTransformer} sortStringToSortDtoTransformer
-   * @param {ParamsObjectToParamsDtoTransformer} paramsObjectToParamsDtoTransformer
-   */
+  private filterObjectToFilterDtoTransformer: FilterObjectToFilterDtoTransformer;
+  private sortStringToSortDtoTransformer: SortStringToSortDtoTransformer;
+  private paramsObjectToParamsDtoTransformer: ParamsObjectToParamsDtoTransformer;
+
   constructor(
-    filterObjectToFilterDtoTransformer,
-    sortStringToSortDtoTransformer,
-    paramsObjectToParamsDtoTransformer
+    filterObjectToFilterDtoTransformer: FilterObjectToFilterDtoTransformer,
+    sortStringToSortDtoTransformer: SortStringToSortDtoTransformer,
+    paramsObjectToParamsDtoTransformer: ParamsObjectToParamsDtoTransformer,
   ) {
-    this._filterObjectToFilterDtoTransformer = filterObjectToFilterDtoTransformer;
-    this._sortStringToSortDtoTransformer = sortStringToSortDtoTransformer;
-    this._paramsObjectToParamsDtoTransformer = paramsObjectToParamsDtoTransformer;
+    this.filterObjectToFilterDtoTransformer = filterObjectToFilterDtoTransformer;
+    this.sortStringToSortDtoTransformer = sortStringToSortDtoTransformer;
+    this.paramsObjectToParamsDtoTransformer = paramsObjectToParamsDtoTransformer;
   }
 
-  /**
-   * @param {express.Request} req
-   * @return {GetRequestDto}
-   */
-  createInstance(req) {
+  public createInstance(request: Request): GetRequestDto {
     /**
      * @type {object} body
      * @type {object} params
      * @type {object} query
      */
-    const { params = {}, query = {} } = req;
+    const { params = {}, query = {} } = request;
 
     // http://expressjs.com/en/4x/api.html#req.query
     const filters = get(query, FILTER);
@@ -42,11 +36,11 @@ export default class GetRequestDtoProvider {
     const sortBy = get(query, SORT);
 
     return new GetRequestDto(
-      this._filterObjectToFilterDtoTransformer.convert(filters),
-      this._paramsObjectToParamsDtoTransformer.convert(params),
+      this.filterObjectToFilterDtoTransformer.convert(filters),
+      this.paramsObjectToParamsDtoTransformer.convert(params),
       offset,
       limit,
-      this._sortStringToSortDtoTransformer.convert(sortBy)
+      this.sortStringToSortDtoTransformer.convert(sortBy),
     );
   }
 }

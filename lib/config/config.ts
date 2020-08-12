@@ -13,7 +13,7 @@ export type ISkeletonConfig = {
 export default (): ISkeletonConfig => ({
   db: {
     // default mongo connection string
-    connectionUrl: "mongodb://localhost:27017/react-example",
+    connectionUrl: 'mongodb://localhost:27017/react-example',
   },
   logger: {
     // default log level

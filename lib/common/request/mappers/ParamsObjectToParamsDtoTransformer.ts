@@ -1,12 +1,8 @@
-import TransformerInterface from "../../mappers/transformer-interface";
-import ParamsDto from "../params-dto";
+import ParamsDto, { Params } from '../ParamsDto';
+import Transformer from '../../mappers/Transformer';
 
-class ParamsObjectToParamsDtoTransformer extends TransformerInterface {
-  /**
-   * @param {object} params
-   * @return {ParamsDto}
-   */
-  convert(params = {}) {
+class ParamsObjectToParamsDtoTransformer implements Transformer<Params, ParamsDto> {
+  public convert(params: Params): ParamsDto {
     return new ParamsDto(params.id);
   }
 }
