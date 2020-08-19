@@ -71,12 +71,35 @@ userSchema.methods.setEmail = function (email: string) {
 };
 
 /**
- * TODO move this to a dynamic factory / provider that takes a connection as a dependency
+ * TODO move this to a dynamic factory / provider that takes a connection as a dependency.
  */
 export class UserModel {
   constructor() {
     return mongoose.model('user', userSchema);
   }
 }
+
+export interface IUserModel {
+  getId(): string;
+
+  getFirstName(): string;
+
+  setFirstName(firstName: string): this;
+
+  getLastName(): string;
+
+  setLastName(lastName: string): this;
+
+  getEmail(): string;
+
+  setEmail(email: string): this;
+}
+
+export type IUser = {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+};
 
 export default new UserModel();

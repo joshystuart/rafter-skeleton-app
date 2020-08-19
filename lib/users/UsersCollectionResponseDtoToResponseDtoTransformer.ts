@@ -1,22 +1,21 @@
-import TransformerInterface from '../common/mappers/transformer-interface';
-import { ENTITY_TYPES } from './user-constants';
+import { ENTITY_TYPES } from './UserConstants';
+import Transformer from '../common/mappers/Transformer';
+import UserModelToObjectTransformer from './UserModelToObjectTransformer';
+import ResponseDtoProvider from '../common/response/ResponseDtoProvider';
+import UsersCollectionResponseDto from './UsersCollectionResponseDto';
+import ResponseDto from '../common/response/ResponseDto';
 
-export default class UsersCollectionResponseDtoToResponseDtoTransformer extends TransformerInterface {
-  /**
-   * @param {TransformerInterface} userModelToObjectTransformer
-   * @param {ResponseDtoProvider} responseDtoProvider
-   */
-  constructor(userModelToObjectTransformer, responseDtoProvider) {
-    super();
+export default class UsersCollectionResponseDtoToResponseDtoTransformer
+  implements Transformer<UsersCollectionResponseDto, ResponseDto> {
+  private readonly userModelToObjectTransformer: UserModelToObjectTransformer;
+  private readonly responseDtoProvider: ResponseDtoProvider;
+
+  constructor(userModelToObjectTransformer: UserModelToObjectTransformer, responseDtoProvider: ResponseDtoProvider) {
     this.userModelToObjectTransformer = userModelToObjectTransformer;
     this.responseDtoProvider = responseDtoProvider;
   }
 
-  /**
-   * @param {UsersCollectionResponseDto} source
-   * @return {ResponseDto}
-   */
-  convert(source) {
+  public convert(source: UsersCollectionResponseDto): ResponseDto {
     const users = source.getUsers();
     const offset = source.getOffset();
     const limit = source.getLimit();

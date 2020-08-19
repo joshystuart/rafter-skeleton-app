@@ -9,7 +9,7 @@ export default class MongooseDbDao {
   }
 
   public async connect(): Promise<Mongoose> {
-    return mongoose.connect(this.connectionUrl);
+    return mongoose.connect(this.connectionUrl, { useNewUrlParser: true, useUnifiedTopology: true });
   }
 
   public async create(model: Document): Promise<Document> {
@@ -39,6 +39,7 @@ export default class MongooseDbDao {
    * @return {Promise.<Model.schema>}
    */
   public async findAll(model: Model<any>, options: FilterQuery<any>): Promise<DocumentQuery<any, any>> {
+    // TODO fix this type
     return model.find(options.criteria);
   }
 

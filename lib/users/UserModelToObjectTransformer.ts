@@ -1,18 +1,9 @@
-import TransformerInterface from '../common/mappers/transformer-interface';
-import UserModel from './user-schema';
-import { FIELDS } from './user-constants';
+import Transformer from '../common/mappers/Transformer';
+import { IUserModel, IUser } from './UserSchema';
+import { FIELDS } from './UserConstants';
 
-/**
- * A User mapper to convert database models to responses
- *
- * @constructor
- */
-export default class UserModelToObjectTransformer extends TransformerInterface {
-  /**
-   * @param {UserModel|UserModel[]} source
-   * @returns {object|object[]}
-   */
-  convert(source) {
+export default class UserModelToObjectTransformer implements Transformer<IUserModel | IUserModel[], IUser | IUser[]> {
+  public convert(source: IUserModel | IUserModel[]): IUser | IUser[] {
     if (source instanceof Array) {
       return this.convertArray(source);
     }
@@ -20,32 +11,16 @@ export default class UserModelToObjectTransformer extends TransformerInterface {
     return this.convertSingle(source);
   }
 
-  /**
-   * Converts an {@link User} model to a response object.
-   *
-   * @param {UserModel} source
-   * @returns {object}
-   * @private
-   */
-  _convertSingle(source) {
-    if (source instanceof UserModel) {
-      return {
-        [FIELDS.ID]: source.getId(),
-        [FIELDS.FIRST_NAME]: source.getFirstName(),
-        [FIELDS.LAST_NAME]: source.getLastName(),
-        [FIELDS.EMAIL]: source.getEmail(),
-      };
-    }
+  private convertSingle(source: IUserModel): IUser {
+    return {
+      [FIELDS.ID]: source.getId(),
+      [FIELDS.FIRST_NAME]: source.getFirstName(),
+      [FIELDS.LAST_NAME]: source.getLastName(),
+      [FIELDS.EMAIL]: source.getEmail(),
+    } as IUser;
   }
 
-  /**
-   * Converts an {@link Array} of {@link User} models to an {@link Array} of response objects.
-   *
-   * @param {UserModel[]} source
-   * @returns {object[]}
-   * @private
-   */
-  _convertArray(source) {
+  private convertArray(source: IUserModel[]): IUser[] {
     const response = [];
 
     for (const model of source) {
